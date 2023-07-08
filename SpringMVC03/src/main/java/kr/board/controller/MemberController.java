@@ -42,7 +42,7 @@ public class MemberController {
 		   m.getMemEmail()==null || m.getMemEmail().equals("")){
 		   
 		   //누락메세지를 가지고 가기? - > 객체바인딩( model, HttpServletRequest , HttpSession)
-		   rttr.addFlashAttribute("msgType","누락 메세지");
+		   rttr.addFlashAttribute("msgType","실패 메세지");
 		   rttr.addFlashAttribute("msg","모든 내용을 입력하세요.");
 		   return "redirect:/memJoin.do";
 		}
@@ -53,14 +53,14 @@ public class MemberController {
 			rttr.addFlashAttribute("msgType","성공 메세지");
 			rttr.addFlashAttribute("msg","회원가입의 성공했습니다.");
 			// 	회원가입 성공하면 -> 로그인처리 까지 되는걸로 , 로그인이 되면 보통 세션으로 처리한다. 
-			session.setAttribute("m", m);
+			session.setAttribute("mvo", m); // ${empty m}
 			return "redirect:/";
 			
 		}else {
-			
+			rttr.addFlashAttribute("msgType","실패 메세지");
+			rttr.addFlashAttribute("msg","이미 존재하는 회원입니다.");
+			return "redirect:/memJoin.do"; 
+				
 		}
-		
-		
-		return "";
 	}
 }

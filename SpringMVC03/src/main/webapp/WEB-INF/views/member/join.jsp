@@ -15,6 +15,14 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript">
+	$(doucment).ready(function(){
+		if(${!empty msgType}){
+			if(${messageType eq "실패 메시지"}){
+				$("#messageType").attr("class", "modal-content panel-warning")
+			}else
+			$("#myMessage").modal("show");
+		}
+	});
 	function registerCheck() {
 		var memID = $("#memID").val();
 		$.ajax({
@@ -142,7 +150,7 @@
 
 			</div>
 			<!--  다이얼로그창(모달) -->
-			<!-- Modal -->
+			<!-- 성공 Modal -->
 			<div class="modal fade" id="myModal" role="dialog">
 				<div class="modal-dialog">
 
@@ -163,8 +171,27 @@
 
 				</div>
 			</div>
+			<!-- 실패 메시지 modal 출력 -->
+				<div class="modal fade" id="MyMessage" role="dialog">
+				<div class="modal-dialog">
 
+					<!-- Modal content-->
+					<div id="messageType" class="modal-content panel-info">
+						<div class="modal-header panel-heading">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">${msgType}</h4>
+						</div>
+						<div class="modal-body">
+							<p>${msg}</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+						</div>
+					</div>
 
+				</div>
+			</div>
 			<div class="panel-footer">김성욱</div>
 		</div>
 	</div>

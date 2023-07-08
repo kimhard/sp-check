@@ -129,7 +129,7 @@ public class MemberController {
 		   return "redirect:/memUpdateForm.do";  // ${msgType} , ${msg}
 		}
 		if(!memPassword1.equals(memPassword2)) {
-		   rttr.addFlashAttribute("msgType", "실패 메세지");
+		   rttr.addFlashAttribute("msgType", "실패 메세지"); 	 	  
 		   rttr.addFlashAttribute("msg", "비밀번호가 서로 다릅니다.");
 		   return "redirect:/memUpdateForm.do";  // ${msgType} , ${msg}
 		}		

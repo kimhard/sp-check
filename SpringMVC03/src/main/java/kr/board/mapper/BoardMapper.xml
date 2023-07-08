@@ -11,6 +11,12 @@
     values(#{title},#{content},#{writer})
   </insert>
   
+   <insert id="register" parameterType="kr.board.entity.Member">
+     insert into
+     mem_tbl(memID,memPassword,memName,memAge,memGender,memEmail,memProfile)
+     values(#{memID},#{memPassword},#{memName},#{memAge},#{memGender},#{memEmail},#{memProfile})
+  </insert>
+  
   <select id="boardContent" resultType="kr.board.entity.Board">
      select * from myboard where idx=#{idx}
   </select>

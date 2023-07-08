@@ -29,10 +29,12 @@
 				if (result == 1) {
 					$("#checkMessage").html("사용할수 있는 아이디입니다.")
 					$("#checkType")
-							.attr("class", "modal-content panel-warning")
+							.attr("class", "modal-content panel-success")
 
 				} else {
 					$("#checkMessage").html("사용할수 없는 아이디입니다.")
+					$("#checkType")
+							.attr("class", "modal-content panel-warning");
 				}
 				$("#myModal").modal("show");
 			},
@@ -46,12 +48,19 @@
 		var memPassword1 = $("#memPassword1").val();
 		var memPassword2 = $("#memPassword2").val();
 		if (memPassword1 != memPassword2) {
-			$("#passMessage").html("비밀번호가 서로 일치하지 않습니다.");	
-		}else{
-			$("#passMessage").html(" "); 
-			$("#memPassword").val("memPassword1"); 
+			$("#passMessage").html("비밀번호가 서로 일치하지 않습니다.");
+		} else {
+			$("#passMessage").html(" ");
+			$("#memPassword").val("memPassword1");
 		}
-
+	}
+	function goInsert(){
+		var memAge=$("memAge").val();
+		if(memAge==null || memAge=="" || memAge ==0){
+			alert("나이를 입력하세요");
+			return false;
+		}
+		document.frm.submit(); //전송
 	}
 </script>
 </head>
@@ -62,8 +71,8 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">회원가입</div>
 			<div class="panel-body">
-				<form action="${contextPath}/memregister.do" method="post">
-				<input type = "hidden" id = "memPassword" name ="memPassword" value=""/>				
+				<form name ="frm" action="${contextPath}/memregister.do" method="post">
+					<input type="hidden" id="memPassword" name="memPassword" value="" /> <!-- 사용자가 설정하는 패스워드는 password로 받아들이나 가입당시에는 ps1 ps2로 보내기 때문에 hidden으로 하나주자는 의미로 하나설정함  -->
 					<table class="table table-bordered"
 						style="text-align: center; border: 1px solid #dddddd">
 						<tr>
@@ -123,8 +132,8 @@
 								placeholder="이메일을 입력하세요." /></td>
 						</tr>
 						<tr>
-							<td colspan="3" style="text-align: Left;"><span id="passMessage" style="color: red"></span> 
-								<input type="submit"
+							<td colspan="3" style="text-align: Left;"><span
+								id="passMessage" style="color: red"></span> <input type="button"
 								class="btn btn-primary btn-sm pull-right" value="등록" /></td>
 						</tr>
 					</table>

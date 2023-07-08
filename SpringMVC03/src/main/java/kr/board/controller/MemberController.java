@@ -1,5 +1,7 @@
 package kr.board.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,9 +34,8 @@ public class MemberController {
 	}
 	//회원가입처리
 	@RequestMapping("/memRegister.do")
-	public String memRegister(Member m, RedirectAttributes rttr) {
+	public String memRegister(Member m, RedirectAttributes rttr, HttpSession session) {
 		if(m.getMemID()==null || m.getMemID().equals("")||
-		   m.getMemPassword()==null || m.getMemPassword().equals("")||	
 		   m.getMemName()==null || m.getMemName().equals("")||	
 		   m.getMemAge()==0 || m.getMemName().equals("") || 
 		   m.getMemGender()==null || m.getMemGender().equals("")||
@@ -44,11 +45,22 @@ public class MemberController {
 		   rttr.addFlashAttribute("msgType","누락 메세지");
 		   rttr.addFlashAttribute("msg","모든 내용을 입력하세요.");
 		   return "redirect:/memJoin.do";
+		}
+		m.setMemProfile(""); //사진이 없다는 의미 ""
+		//회원을 테이블에 저장하기
+		int result = memberMapper.register(m);
+		if(result==1) { //회원가입 성공 메시지 보내기
+			rttr.addFlashAttribute("msgType","성공 메세지");
+			rttr.addFlashAttribute("msg","회원가입의 성공했습니다.");
+			// 	회원가입 성공하면 -> 로그인처리 까지 되는걸로 , 로그인이 되면 보통 세션으로 처리한다. 
+			session.setAttribute("m", m);
+			return "redirect:/";
 			
+		}else {
 			
 		}
-		   
-				
+		
+		
 		return "";
 	}
 }

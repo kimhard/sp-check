@@ -9,8 +9,8 @@ public class Member {
   private String memPassword; // 내용
   private String memName; // 작성자q
   private int memAge; // 작성일
-  private String memGender; // 조회수
-  private String memEmail; // 조회수
-  private String memProfile; // 조회수
+  private String memGender; // 성별
+  private String memEmail; // 이메일
+  private String memProfile; // 프로필
   // setter , getter 
 }

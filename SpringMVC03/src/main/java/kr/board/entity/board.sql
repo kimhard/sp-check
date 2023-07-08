@@ -29,5 +29,5 @@ create table mem_tbl(
 	memEmail varchar(50),
 	memProfile varchar(50),
 	primary key(memIdx)
-l);
+);
 

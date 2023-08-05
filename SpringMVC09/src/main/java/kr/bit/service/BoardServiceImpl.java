@@ -3,6 +3,7 @@ package kr.bit.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import kr.bit.entity.Board;
@@ -70,8 +71,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public int totalCount() {		
-		return boardMapper.totalCount();
+	public int totalCount(Criteria cri) {		
+		return boardMapper.totalCount(cri);
 	}	
 
 }

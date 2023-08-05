@@ -36,6 +36,7 @@
     		var tag="<input type='hidden' name='idx' value='"+idx+"'/>";
     		pageFrm.append(tag);
     		pageFrm.attr("action","${cpath}/board/get");
+    		pageFrm.attr("method","get");
     		pageFrm.submit();
     	});
     	
@@ -134,25 +135,21 @@
         </c:if>
       </table>
       <!-- 검색메뉴 -->
-  <div style="text-align: center;">
-  <form class="form-inline" action="${cpath}/board/list" method="post">
-  	<div class="form-group">
-  	<select name="type" class="form-control">
-  	<option value="writer">이름</option>
-  	<option value="title">제목</option>
-  	<option value="content">내용</option> 	
-  	</select>
-    </div>
-      <div class="form-group">
-      <input type="text" class="form-control" name="keyword">
-    </div>
-    <button type="submit" class="btn btn-success">검색</button>
-  </form>
-  </div>
-</div>
-
-
-      
+       <div style="text-align: center;">
+		<form class="form-inline" action="${cpath}/board/list" method="post">
+		  <div class="form-group">	
+		   <select name="type" class="form-control">
+		      <option value="writer" ${pageMaker.cri.type=='writer' ? 'selected' : ''}>이름</option>
+		      <option value="title" ${pageMaker.cri.type=='title' ? 'selected' : ''}>제목</option>
+		      <option value="content" ${pageMaker.cri.type=='content' ? 'selected' : ''}>내용</option>
+		   </select>
+		  </div>
+		  <div class="form-group">	
+		    <input type="text" class="form-control" name="keyword" value="${pageMaker.cri.keyword}">
+		  </div>
+		  <button type="submit" class="btn btn-success">검색</button>
+		</form>
+	   </div>
       <!-- 페이징 START -->
       <div style="text-align: center">
 	    <ul class="pagination">
@@ -161,7 +158,6 @@
         <li class="paginate_button previous">
           <a href="${pageMaker.startPage-1}">◀</a>
         </li>
-        
       </c:if>      
       <!-- 페이지번호 처리 -->
           <c:forEach var="pageNum" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
@@ -176,10 +172,12 @@
         </ul>
       </div>
       <!-- END -->
-      <form id="pageFrm" action="${cpath}/board/list" method="get">
+      <form id="pageFrm" action="${cpath}/board/list" method="post">
          <!-- 게시물 번호(idx)추가 -->         
          <input type="hidden" id="page" name="page" value="${pageMaker.cri.page}"/>
          <input type="hidden" name="perPageNum" value="${pageMaker.cri.perPageNum}"/>
+         <input type="hidden" name="type" value="${pageMaker.cri.type}"/>
+         <input type="hidden" name="keyword" value="${pageMaker.cri.keyword}"/>
       </form>      
       <!-- Modal 추가 -->
 	  <div id="myModal" class="modal fade" role="dialog">

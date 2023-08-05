@@ -80,6 +80,8 @@
       </table>
           <input type="hidden" name="page" value="<c:out value='${cri.page}'/>"/>
           <input type="hidden" name="perPageNum" value="<c:out value='${cri.perPageNum}'/>"/>
+          <input type="hidden" name="type" value="<c:out value='${cri.type}'/>"/>
+          <input type="hidden" name="keyword" value="<c:out value='${cri.keyword}'/>"/>
       </form>
     </div>
     <div class="panel-footer">스프2탄(답변형 게시판 만들기)</div>
